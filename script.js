@@ -23,38 +23,54 @@ console.log(document.querySelector(".guess").value);
 // Add event listener for click, followed by even handler (a function which should execute on click event)
 // addEventListener is event listener function, takes in 2 parameters.
 
-// Generating a secret number and setting it
+// Final project: Generating a secret number and setting it
 const secretNumber = Math.trunc(Math.random() * 20 + 1);
 document.querySelector(".number").textContent = secretNumber;
 let gameScore = document.querySelector(".score").textContent;
 
 document.querySelector(".check").addEventListener("click", function () {
   const numberGuess = Number(document.querySelector(".guess").value);
+
+  // No input provided
   if (!numberGuess) {
     document.querySelector(".message").textContent = "🚫 Blank input";
+
+    // When guess number is greater than actual number
   } else if (numberGuess > secretNumber) {
+    // When game score is still positive
     if (gameScore > 1) {
       document.querySelector(".message").textContent = "📈 Guess is too high";
       gameScore -= 1;
       document.querySelector(".score").textContent = gameScore;
+
+      // User lost the game
     } else {
       document.querySelector(".message").textContent = "😡 You lost the game";
       gameScore -= 1;
       document.querySelector(".score").textContent = gameScore;
     }
+
+    // Guessed number is lesser than actual number
   } else if (numberGuess < secretNumber) {
+    // Game score is still positive
     if (gameScore > 1) {
       document.querySelector(".message").textContent = "📉 Guess is too low";
       gameScore -= 1;
       document.querySelector(".score").textContent = gameScore;
+
+      // User lost the game
     } else {
       document.querySelector(".message").textContent = "😡 You lost the game";
       gameScore -= 1;
       document.querySelector(".score").textContent = gameScore;
     }
+
+    // Guessed number is correct
   } else if (numberGuess === secretNumber) {
     document.querySelector(
       ".message"
     ).textContent = `🥳🎉🎊 You've won with score of ${gameScore}`;
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".number").style.width = "30rem";
   }
 });
