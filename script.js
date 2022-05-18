@@ -26,7 +26,11 @@ console.log(document.querySelector(".guess").value);
 // Final project: Generating a secret number and setting it
 let secretNumber = Math.trunc(Math.random() * 20 + 1);
 
+// Score
 let gameScore = document.querySelector(".score").textContent;
+
+// Highscore
+let highScore = 0;
 
 document.querySelector(".check").addEventListener("click", function () {
   const numberGuess = Number(document.querySelector(".guess").value);
@@ -65,7 +69,7 @@ document.querySelector(".check").addEventListener("click", function () {
       document.querySelector(".score").textContent = gameScore;
     }
 
-    // Guessed number is correct
+    // Guessed number is correct. User won.
   } else if (numberGuess === secretNumber) {
     document.querySelector(
       ".message"
@@ -73,6 +77,12 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
     document.querySelector(".number").textContent = secretNumber;
+
+    // Update "Highscore"
+    if (gameScore > highScore) {
+      highScore = gameScore;
+      document.querySelector(".highscore").textContent = highScore;
+    }
   }
 });
 
