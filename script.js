@@ -24,8 +24,8 @@ console.log(document.querySelector(".guess").value);
 // addEventListener is event listener function, takes in 2 parameters.
 
 // Final project: Generating a secret number and setting it
-const secretNumber = Math.trunc(Math.random() * 20 + 1);
-document.querySelector(".number").textContent = secretNumber;
+let secretNumber = Math.trunc(Math.random() * 20 + 1);
+
 let gameScore = document.querySelector(".score").textContent;
 
 document.querySelector(".check").addEventListener("click", function () {
@@ -72,5 +72,20 @@ document.querySelector(".check").addEventListener("click", function () {
     ).textContent = `🥳🎉🎊 You've won with score of ${gameScore}`;
     document.querySelector("body").style.backgroundColor = "#60b347";
     document.querySelector(".number").style.width = "30rem";
+    document.querySelector(".number").textContent = secretNumber;
   }
+});
+
+// Event listener and handler for game reset button "Again!"
+document.querySelector(".again").addEventListener("click", function () {
+  //Resetting to new secret number and score back to 20
+  secretNumber = Math.trunc(Math.random() * 20 + 1);
+  gameScore = 20;
+  // Resetting application back to initial stage
+  document.querySelector(".number").textContent = "?";
+  document.querySelector(".number").style.width = "15rem";
+  document.querySelector(".guess").value = "";
+  document.querySelector(".message").textContent = "Start guessing...";
+  document.querySelector(".score").textContent = "20";
+  document.querySelector("body").style.backgroundColor = "#222";
 });
